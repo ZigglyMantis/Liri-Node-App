@@ -36,7 +36,7 @@ function liriBot(){
 
     function concertThis(){
     var artist = input
-    console.log(input)
+    // console.log(input)
     var URL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
         axios.get(URL).then(function(response){
             var jsonData = response.data[0];
@@ -87,6 +87,29 @@ function liriBot(){
             }
         );
     };
+    
+    function movieThis(){
+        var movie = input
+        omdbKey = keys.omdb
+        console.log(movie)
+        var URL = "https://www.omdbapi.com/?t=" + movie + "&apikey=" + omdbKey
+        axios.get(URL).then(function(response){
+            var jsonData = response.data
+            console.log(jsonData)
+            var movieData = [
+                "Title: ",
+                "Year released: ",
+                "IMDB Rating: ",
+                "Rotten Tomatoes Rating: ",
+                "Country of production: ",
+                "Language: ",
+                "Plot: ",
+                "Cast: ",
+            ]
+            console.log(movieData)
+        });
+        
+    }
 }
 // Switch functions
 
