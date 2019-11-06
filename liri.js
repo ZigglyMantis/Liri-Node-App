@@ -2,6 +2,7 @@ require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require("node-spotify-api")
 var spotify = new Spotify(keys.spotify);
+var omdbKey = "3e8a4065"
 var fs = require("fs")
 var moment = require("moment")
 var axios = require("axios")
@@ -90,25 +91,37 @@ function liriBot(){
     
     function movieThis(){
         var movie = input
-        omdbKey = keys.omdb
         console.log(movie)
-        var URL = "https://www.omdbapi.com/?t=" + movie + "&apikey=" + omdbKey
+        var URL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy&plot=short"
         axios.get(URL).then(function(response){
             var jsonData = response.data
             console.log(jsonData)
             var movieData = [
-                "Title: ",
-                "Year released: ",
-                "IMDB Rating: ",
-                "Rotten Tomatoes Rating: ",
-                "Country of production: ",
-                "Language: ",
-                "Plot: ",
-                "Cast: ",
+                "Title: " + jsonData.Title,
+                "Year released: " + jsonData.Year,
+                "IMDB Rating: " + jsonData.imdbRating,
+                "Country of production: " + jsonData.Country,
+                "Language: " + jsonData.Language,
+                "Plot: " + jsonData.Plot,
+                "Cast: " + jsonData.Actors,
             ]
             console.log(movieData)
         });
         
+    }
+
+    function doThis() {
+       fs.readFile("random.txt", function(err, fileData) {
+
+        if(err){
+        return console.log(err)
+        }
+
+        var arrayInfo = fileData.toString().split(",");
+        command = arrayInfo[0]
+        input = arrayInfo.slice(1).join(' ');
+        spotifyThis(input)
+       });
     }
 }
 // Switch functions
