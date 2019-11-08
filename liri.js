@@ -91,11 +91,11 @@ function liriBot(){
     
     function movieThis(){
         var movie = input
-        console.log(movie)
+        // console.log(movie)
         var URL = "https://www.omdbapi.com/?t=" + movie + "&apikey=trilogy&plot=short"
         axios.get(URL).then(function(response){
             var jsonData = response.data
-            console.log(jsonData)
+            // console.log(jsonData)
             var movieData = [
                 "Title: " + jsonData.Title,
                 "Year released: " + jsonData.Year,
